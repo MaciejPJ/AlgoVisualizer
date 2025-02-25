@@ -6,7 +6,7 @@ from PyQt5.QtCore import QTimer, pyqtSignal, Qt
 from PyQt5.QtGui import QBrush, QColor, QFont
 from typing import Generator
 import random
-from sorting import bubble_sort, quick_sort
+from sorting import bubble_sort, quick_sort, selection_sort
 
 # colors
 BLUE_COLOR = "#2471A3"
@@ -62,7 +62,7 @@ class MainWindow(QMainWindow):
         layout = QVBoxLayout(central_widget)
         control_layout = QHBoxLayout()
         self.algorithm_selector = QComboBox()
-        self.algorithm_selector.addItems(["BubbleSort", "QuickSort"]) # <-- Add new algorithms here
+        self.algorithm_selector.addItems(["BubbleSort", "QuickSort", "SelectionSort"]) # <-- Add new algorithms here
 
         # Canvas
         self.canvas = CustomGraphicsView()
@@ -228,7 +228,8 @@ class MainWindow(QMainWindow):
         """
         algorithms = {
             "BubbleSort": bubble_sort,
-            "QuickSort": quick_sort
+            "QuickSort": quick_sort,
+            "SelectionSort": selection_sort
         }
         return algorithms[name](self.data.copy())
 
@@ -262,7 +263,7 @@ class MainWindow(QMainWindow):
 
         for i, value in enumerate(data):
             x = i * (bar_width + 2) # Spacing of 2px between bars
-            bar_height = (value / max_value) * (height - margin_bottom) - 10
+            bar_height = (value / max_value) * (height - margin_bottom) - 20
 
             # y coordinate from the bottom of canvas
             y = height - bar_height - margin_bottom + 10

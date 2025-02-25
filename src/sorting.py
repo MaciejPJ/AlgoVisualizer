@@ -53,10 +53,10 @@ def selection_sort(data: List[int]) -> Generator[Tuple[List[int], List[int]], No
     for i in range(n):
         index_of_smallest = i
         for j in range(i + 1, n):
-            yield data, [index_of_smallest, j]
+            yield data, [index_of_smallest, j], 'compare'
             if data[j] < data[index_of_smallest]:
                 index_of_smallest = j
         data[i], data[index_of_smallest] = data[index_of_smallest], data[i]
 
-    yield data, [j, j+1]         
+    yield data, [j, j+1], 'swap'         
         
