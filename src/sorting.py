@@ -46,7 +46,7 @@ def selection_sort(data: List[int]) -> Generator[Tuple[List[int], List[int]], No
     Step generator for selection sort algorithm.
 
     Args:
-        data: a list of numbers to sort
+        data: a list of numbers to sort.
     """
     n = len(data)
 
@@ -60,3 +60,39 @@ def selection_sort(data: List[int]) -> Generator[Tuple[List[int], List[int]], No
 
     yield data, [j, j+1], 'swap'         
         
+def insertion_sort(data: List[int]) -> Generator[Tuple[List[int], List[int]], None, None]:
+    """
+    Step generator for insertion sort algorithm.
+
+    Args:
+        data: a lsit of numbers to sort.
+
+    Yields:
+        Tuple (current_data, highlighted_indicies, operation_type):
+            - current_data: current state of data
+            - highlighted indicies: highlighted indicies
+            - operation_type: type of operation (select, compare, pivot, ...)
+    """
+    n = len(data)
+
+    for i in range(1, n):
+        key: int = data[i]
+        j: int = i - 1
+
+        # Highlight choosen element
+        yield data.copy(), [i], 'select'
+
+        # Compare the key with each element on the left side.
+        while j >= 0 and key < data[j]:
+
+            # Highlight compared elements
+            yield data.copy(), [i, j, j+1], 'compare'
+
+            # Shift the element and highlight it
+            data[j + 1] = data[j]
+            yield data.copy(), [j, j+1], 'shift'
+            j -= 1
+
+        # Insert the key at the right position and highlight
+        data[j + 1] = key
+        yield data.copy(), [j + 1], 'insert'

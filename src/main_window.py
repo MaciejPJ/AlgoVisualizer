@@ -6,7 +6,7 @@ from PyQt5.QtCore import QTimer, pyqtSignal, Qt
 from PyQt5.QtGui import QBrush, QColor, QFont
 from typing import Generator
 import random
-from sorting import bubble_sort, quick_sort, selection_sort
+from sorting import bubble_sort, quick_sort, selection_sort, insertion_sort
 
 # colors
 BLUE_COLOR = "#2471A3"
@@ -14,7 +14,9 @@ RED_COLOR = "#e11212"
 GREEN_COLOR = "#2ecc71"  
 YELLOW_COLOR = "#f1c40f"  
 PIVOT_COLOR = "#e67e22"   
-TEXT_COLOR = "#000000"     
+TEXT_COLOR = "#000000"
+SELECT_COLOR = "#e67e22"
+INSERT_COLOR = "#2ecc71"     
 
 INTERVAL_TIME = 700
 
@@ -62,7 +64,8 @@ class MainWindow(QMainWindow):
         layout = QVBoxLayout(central_widget)
         control_layout = QHBoxLayout()
         self.algorithm_selector = QComboBox()
-        self.algorithm_selector.addItems(["BubbleSort", "QuickSort", "SelectionSort"]) # <-- Add new algorithms here
+        self.algorithm_selector.addItems(["BubbleSort", "QuickSort", "SelectionSort",
+                                          "InsertionSort"]) # <-- Add new algorithms here
 
         # Canvas
         self.canvas = CustomGraphicsView()
@@ -237,7 +240,8 @@ class MainWindow(QMainWindow):
         algorithms = {
             "BubbleSort": bubble_sort,
             "QuickSort": quick_sort,
-            "SelectionSort": selection_sort
+            "SelectionSort": selection_sort,
+            "InsertionSort": insertion_sort,
         }
         return algorithms[name](self.data.copy())
 
@@ -287,6 +291,10 @@ class MainWindow(QMainWindow):
                     base_color = GREEN_COLOR
                 elif operation_type == 'pivot':
                     base_color = PIVOT_COLOR
+                elif operation_type == 'select':
+                    base_color = SELECT_COLOR
+                elif operation_type == 'insert':
+                    base_color = INSERT_COLOR
                 else:
                     base_color = RED_COLOR
 
