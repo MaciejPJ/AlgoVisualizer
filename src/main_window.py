@@ -5,6 +5,7 @@ from PyQt5.QtWidgets import (QMainWindow, QPushButton, QLabel, QVBoxLayout,
 from PyQt5.QtCore import QTimer, pyqtSignal, Qt
 from PyQt5.QtGui import QBrush, QColor, QFont
 from typing import Generator
+from pathlib import Path
 import random
 from sorting import bubble_sort, quick_sort, selection_sort, insertion_sort
 
@@ -109,34 +110,10 @@ class MainWindow(QMainWindow):
         # Drawing
         self.draw_bars(self.data)
 
-        self.setStyleSheet("""
-        QMainWindow {
-            background-color: #2c3e50;
-        }
-        QLabel {
-            color: #ecf0f1;
-            font-size: 14px;
-        }
-        QPushButton {
-            background-color: #3498db;
-            color: white;
-            border: none;
-            padding: 8px;
-            border-radius: 4px;
-            min-width: 80px;
-        }
-        QPushButton:disabled {
-            background-color: #7f8c8d;
-        }
-        QPushButton:hover {
-            background: qlineargradient(
-                x1: 0, y1: 0,
-                x2: 0, y2: 1,
-                stop: 0 #ffffff,
-                start: 1 #3498db                                 
-                           )                
-        }
-                           """)
+        # Load styles from .qss file
+        self._load_styles()
+
+        
 
     def _on_start_clicked(self):
         """
@@ -226,6 +203,14 @@ class MainWindow(QMainWindow):
         INTERVAL_TIME = value
         if self.timer.isActive():
             self.timer.setInterval(value)
+
+    def _load_styles(self):
+        """
+        Loads stylees from .qss file
+        """
+        style_path = Path(__file__).parent / "styles.qss"
+        with open(style_path, "r") as f:
+            self.setStyleSheet(f.read())
 
     def _get_algorithm_generator(self, name: str) -> Generator:
         """

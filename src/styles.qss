@@ -1,0 +1,32 @@
+
+
+QMainWindow {
+            background-color: #2c3e50;
+}
+
+QLabel {
+            color: #ecf0f1;
+            font-size: 14px;
+}
+
+QPushButton {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 8px;
+            border-radius: 4px;
+            min-width: 80px;
+}
+
+QPushButton:disabled {
+            background-color: #7f8c8d;
+}
+
+QPushButton:hover {
+            background: qlineargradient(
+                x1: 0, y1: 0,
+                x2: 0, y2: 1,
+                stop: 0 #ffffff,
+                start: 1 #3498db                                 
+                           )                
+}
