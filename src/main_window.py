@@ -263,7 +263,7 @@ class MainWindow(QMainWindow):
             bar_height = (value / max_value) * (height - margin_bottom) - 20
 
             # y coordinate from the bottom of canvas
-            y = height - bar_height - margin_bottom + 10
+            y = height - bar_height - margin_bottom + 15
 
             # Main bra color
             base_color = BLUE_COLOR
