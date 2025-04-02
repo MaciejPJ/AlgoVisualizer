@@ -2,6 +2,8 @@
 
 This project provides a visualization of various sorting algorithms using a graphical user interface built with PyQt5. The application displays the step-by-step process of selected sorting algorithms and highlights the elements being processed with different colors.
 
+![Sorting Visualizer Screenshot](images/AlgoVisualizer_screen.png)
+
 ## Table of Contents
 
 - [Features](#features)
